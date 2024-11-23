@@ -1,1 +1,20 @@
-<p>chat works!</p>
+<div class="container">
+    <div class="col-md-12 text-center">
+        <h1>Angular Ecommerce Chatbot</h1><hr>
+        <ng-container *ngFor="let msg of messages">
+            <div class="msg" [ngClass]="{'from':msg.author==='bot', 'to': msg.author==='user'}">{{msg.content}}</div>
+        </ng-container>
+    </div>
+    <div class="col-md-12 text-center">
+        <label *ngIf="messages.length==0;" for="nameField">Your Messages</label>
+        <input [(ngModel)]="value" (keyup.enter)="sendMessage()" type="text" class="form-control">
+        <button class="btn btn-outline-primary" (click)="sendMessage()">Ask Me</button>
+        <ng-template>
+            <!-- <span [className]="'float-right'">Total Messages: {{messages.length}}</span> -->
+            <span>Total Messages: {{messages.length}}</span>
+        </ng-template>
+    </div>
+    <div class="col-md-12 text-center">
+        <span>Total Messages: {{messages.length}}</span>
+    </div>
+</div>
