@@ -22,6 +22,7 @@ import { CartSummaryPageComponent } from './cart-summary-page/cart-summary-page.
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { ChatComponent } from './chat/chat.component';
+import { ChatnewComponent } from './chatnew/chatnew.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ChatComponent } from './chat/chat.component';
     CartSummaryPageComponent,
     CheckoutComponent,
     MyOrdersComponent,
-    ChatComponent
+    ChatComponent,
+    ChatnewComponent
   ],
   imports: [
     BrowserModule,
