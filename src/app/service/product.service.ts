@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
   //API_URL = 'https://ecomm-pearl-phi.vercel.app';
-  API_URL = 'http://localhost:3000'; 
+  //API_URL = 'http://localhost:3000'; 
+  API_URL = 'https://github.com/HemantA01/Angular-Ecomm-project/blob/main/src/ecomm.json'; 
   cartData = new EventEmitter<IProductDetails[] | []>();
   constructor(private _http: HttpClient) { }
   addProduct(data: IProductDetails){
