@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   //API_URL = 'https://ecomm-pearl-phi.vercel.app';
-  API_URL = 'http://localhost:3000';
+  API_URL = 'http://localhost:3000'; 
+  //API_URL = 'https://api.jsonbin.io/v3/b/6860d43c8960c979a5b37ec2';
   invalidUserAuth = new EventEmitter<boolean>(false); 
   constructor(private _http: HttpClient, private router: Router) { }
   userSignUp(user: IUserSignUp){

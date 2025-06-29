@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { ICart, IOrderDetails, IProductDetails } from '../interface/seller-details';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,9 @@ export class ProductService {
   //API_URL = 'https://ecomm-pearl-phi.vercel.app';
   //API_URL = 'http://localhost:3000'; 
   //API_URL = 'https://github.com/HemantA01/Angular-Ecomm-project/blob/main/src/ecomm.json'; 
-  API_URL  = 'https://ecomm-json.tiiny.site/json/ecomm';
+  // API_URL  = 'https://ecomm-json.tiiny.site/json/ecomm';
+  API_URL  = 'https://api.jsonbin.io/v3/b/6860d43c8960c979a5b37ec2';
+  MASTER_KEY = '$2a$10$d8jUJPX5oYZKLv1ImkiNmur76JC2.RujA/KrrKi1AMUvchJNulZnG';
   cartData = new EventEmitter<IProductDetails[] | []>();
   constructor(private _http: HttpClient) { }
   addProduct(data: IProductDetails){
@@ -18,9 +20,20 @@ export class ProductService {
     console.log('entered into product added');
     return this._http.post(`${this.API_URL}/products`,data);
   }
-  productList(){
+  /*productList(){
     return this._http.get<IProductDetails[]>(`${this.API_URL}/products`); // adding 'IProductDetails[]' means api will return IProductDetails[] type of data
-  }
+  }*/
+  productList(): Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-Master-Key': this.MASTER_KEY
+    });
+    return this._http.get<any>(this.API_URL, { headers }).pipe(
+      map(response => response.record.products) //extract the 'Products' array
+    )
+  } 
+
+
   deleteProduct(id:number){
    // debugger;
     return this._http.delete(`${this.API_URL}/products/${id}`);
@@ -33,11 +46,29 @@ export class ProductService {
     debugger;
     return this._http.put<IProductDetails>(`${this.API_URL}/products/${data.id}`,data);
   }
-  popularProducts(){
+  /*popularProducts(){
     return this._http.get<IProductDetails[]>(`${this.API_URL}/products?_limit=4`);  //'_limit=3' returns 3 products
+  }*/
+  popularProducts(limit: number = 4): Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-Master-Key': this.MASTER_KEY
+    });
+    return this._http.get<any>(this.API_URL, { headers }).pipe(
+      map(response => response.record.products.slice(0,limit)) //extract the 'Products' array
+    )
   }
-  trendyProducts(){
+  /*trendyProducts(){
     return this._http.get<IProductDetails[]>(`${this.API_URL}/products`);  
+  }*/
+  trendyProducts(): Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-Master-Key': this.MASTER_KEY
+    });
+    return this._http.get<any>(this.API_URL, { headers }).pipe(
+      map(response => response.record.products) //extract the 'Products' array
+    )
   }
   searchProducts(query: string){
     return this._http.get<IProductDetails[]>(`${this.API_URL}/products?q=${query}`);
