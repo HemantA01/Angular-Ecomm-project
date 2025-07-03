@@ -8,10 +8,10 @@ import { Observable, map } from 'rxjs';
 })
 export class ProductService {
   //API_URL = 'https://ecomm-pearl-phi.vercel.app';
-  //API_URL = 'http://localhost:3000'; 
+  //API_URL = 'http://localhost:3000';    //used to run on the localhost
   //API_URL = 'https://github.com/HemantA01/Angular-Ecomm-project/blob/main/src/ecomm.json'; 
   // API_URL  = 'https://ecomm-json.tiiny.site/json/ecomm';
-  API_URL  = 'https://api.jsonbin.io/v3/b/6860d43c8960c979a5b37ec2';
+  API_URL  = 'https://api.jsonbin.io/v3/b/6860d43c8960c979a5b37ec2';  //added to fetch the api from JSONBIN.io where JSOn is deployed
   MASTER_KEY = '$2a$10$d8jUJPX5oYZKLv1ImkiNmur76JC2.RujA/KrrKi1AMUvchJNulZnG';
   cartData = new EventEmitter<IProductDetails[] | []>();
   constructor(private _http: HttpClient) { }
@@ -22,8 +22,8 @@ export class ProductService {
   }
   /*productList(){
     return this._http.get<IProductDetails[]>(`${this.API_URL}/products`); // adding 'IProductDetails[]' means api will return IProductDetails[] type of data
-  }*/
-  productList(): Observable<any>{
+  }*/ // Commneted as this function is used to fetch records from local json server
+  productList(): Observable<any>{ // Added as this function is used to fetch records from JSONBIN.io server where JSOn file is deployed
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'X-Master-Key': this.MASTER_KEY
@@ -48,8 +48,8 @@ export class ProductService {
   }
   /*popularProducts(){
     return this._http.get<IProductDetails[]>(`${this.API_URL}/products?_limit=4`);  //'_limit=3' returns 3 products
-  }*/
-  popularProducts(limit: number = 4): Observable<any>{
+  }*/ // Commneted as this function is used to fetch records from local json server
+  popularProducts(limit: number = 4): Observable<any>{   // Added as this function is used to fetch records from JSONBIN.io server where JSOn file is deployed
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'X-Master-Key': this.MASTER_KEY
@@ -60,8 +60,8 @@ export class ProductService {
   }
   /*trendyProducts(){
     return this._http.get<IProductDetails[]>(`${this.API_URL}/products`);  
-  }*/
-  trendyProducts(): Observable<any>{
+  }*/  // Commneted as this function is used to fetch records from local json server
+  trendyProducts(): Observable<any>{  // Added as this function is used to fetch records from JSONBIN.io server where JSOn file is deployed
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'X-Master-Key': this.MASTER_KEY

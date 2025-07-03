@@ -75,6 +75,14 @@ export class UserAuthComponent implements OnInit {
       return;
     }
     this.userservice.userSignUp(data);
+    /*this.userservice.userSignUp(data).subscribe((result) => 
+    {
+      if(result && <any>result.body.length){
+        console.log('success',result);  
+      }else{
+        console.error('error => ',result)
+      }
+    });*/
   }
   changeSalutation(e: any){
     //debugger;
